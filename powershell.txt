@@ -1,0 +1,114 @@
+#Start sql server service just replace the SQLEXPRESS with Instance name
+Start-Service -Name 'MSSQL$SQLEXPRESS'
+
+#Stop sql server service
+Stop-Service -Name 'MSSQL$SQLEXPRESS'
+
+Get-Alias
+Get-ChildItem
+
+New-Alias -Name "ll" -Value "Get-ChildItem" 
+
+ll
+
+Get-Module -All | Get-Member
+
+Get-Service | Get-member
+
+Import-Module -Name PSDiagnostics
+
+Get-Command -Module PSDiagnostics -TotalCount 8
+
+$PSVersionTable
+
+Get-WmiObject -Class win32_bios -ComputerName localhost
+
+Get-Help | Get-WmiObject 
+
+
+Get-ExecutionPolicy
+
+Get-ExecutionPolicy -list
+
+Get-ExecutionPolicy -Scope MachinePolicy
+
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
+
+pwd
+
+ls
+
+Get-ChildItem
+
+(Get-Item *).LastAccessTime
+
+ls
+
+ls
+
+cd .\Documents
+
+mkdir function
+
+pwd
+
+cd .\function
+
+Get-ChildItem | Out-File C:\Users\Administrator.DEMO\Desktop\Kinder.txt
+
+
+Write-Host (2, 4, 6, 8, 10) -Separator ", *2=" -BackgroundColor Red -ForegroundColor Black
+
+Invoke-Command -ScriptBlock {Get-Process}
+
+
+Invoke-Command -ComputerName "dc1" -ScriptBlock {Get-Process -Name armsvc}
+
+Invoke-Command -ComputerName "dc1","Aiqum" -ScriptBlock {Get-Process}
+
+Get-Process
+
+invoke-command -ComputerName (Get-Content .\Machine.txt) -scriptblock {(get-host).version}
+
+Invoke-Command -ScriptBlock {Get-Host}
+
+$Variable = C:\Users\Administrator.DEMO\Machine.txt
+Start-Process $Variable
+
+Start-Process .\Machine.txt -WindowStyle Maximized
+
+Stop-Process -Name notepad
+
+Test-Path -Path C:\Users\Administrator.DEMO\Machine.txt
+
+Test-Path .\Machine.txt -OlderThan "December 10, 2021"
+
+ls
+Get-ChildItem
+Get-ChildItem | sort -Property LastWriteTime -Verbose
+$k = 10, 15, 20, 11, 5 
+$k[1..3]
+$k[-1]
+
+$k += 2
+$k
+
+$k = ($k[5])
+
+$Subject = @(‘History’,’Geo’,’Maths’)
+$test=@(‘viki’,’ramu’,'aravind','vikram')
+for($i=0;$i -lt $test.Length; $i++)
+{
+Write-Host $test[$i] }
+
+
+$testlist = 5.634, 4.512323, 3.312323, 13.2213213, 4.02324, 34.3334324, 34.04324, 45.4534324, 99.993234324, 11123234234 
+write-host("Printing the array elements")
+$testlist
+
+
+$testht = @{ English = "85"; Tamil = "100"; maths = "100"}
+write-host("Printing all the hashtable keys")
+$testht.keys
+
+Invoke-CimMethod -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation='\\AppSrv\dsp\NewPackage.msi'}
