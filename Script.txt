@@ -1,0 +1,20 @@
+
+$Servers = 'localhost','dc1' , 'AIQUM' 
+ $NumberOf = Read-Host -Prompt 'Enter number of times you want to run'
+ foreach ($Server in $Servers)
+ {    Write-Host $Server
+ for ($i=1; $i -le $NumberOf; $i++)
+ {        $DateTime = Get-Date -Format G
+                    $ProcessorPercentage = (Get-WmiObject Win32_PerfFormattedData_PerfOS_Processor -ComputerName $Server -filter "Name='_Total'").PercentProcessorTime
+          $output="$Server, $DateTime`: $ProcessorPercentage"
+          $output | out-file "C:\Users\Administrator.DEMO\Desktop\cpuutilisation.csv" -Force -append
+
+          $ComputerMemory = Get-WmiObject -ComputerName $Server -Class win32_operatingsystem -ErrorAction Stop
+
+$Memory = ((($ComputerMemory.TotalVisibleMemorySize - $ComputerMemory.FreePhysicalMemory)*100)/ $ComputerMemory.TotalVisibleMemorySize)
+
+$MU = [math]::Round($Memory,2)
+ $output2 = "$Server, $MU, $DateTime" 
+ $output2 | out-file "C:\Users\Administrator.DEMO\Desktop\memoryutilisation.csv" -Force -append
+          }
+          }
